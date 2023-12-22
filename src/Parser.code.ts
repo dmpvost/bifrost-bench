@@ -57,7 +57,7 @@ const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 //
 // i18n.timeNames = ["a", "p", "am", "pm", "A", "P", "AM", "PM"];
 
-export default class ParserCode {
+export class ParserCode {
     constructor() {
     }
 
@@ -149,7 +149,7 @@ export default class ParserCode {
         date: string | Date | number,
         field: string,
         minDate: Date = new Date("01/01/2017"),
-        maxDate: Date = new Date("01/01/2030")
+        maxDate: Date = new Date("01/01/2040")
     ): Date {
         try {
             //console.log("input -> validator_date:", date, field);
@@ -204,10 +204,10 @@ export default class ParserCode {
                 throw new LocalizeError(MessageCodes.FORMAT_BAD_DATE_FORMAT, field + ": Bad date format [" + dateReceived + "]");
             }
             if (dateReceived > maxDate) {
-                throw new LocalizeError(MessageCodes.DATE_OUT_OF_RANGE_TOO_BIG, format(maxDate, 'dd/MM/yyyy'));
+                throw new LocalizeError(MessageCodes.DATE_OUT_OF_RANGE_TOO_BIG, "maxDate: " + format(maxDate, 'dd/MM/yyyy'));
             }
             if (dateReceived < minDate) {
-                throw new LocalizeError(MessageCodes.DATE_OUT_OF_RANGE_TOO_SMALL, format(minDate, 'dd/MM/yyyy'));
+                throw new LocalizeError(MessageCodes.DATE_OUT_OF_RANGE_TOO_SMALL, "minDate: " + format(minDate, 'dd/MM/yyyy'));
             }
 
             return dateReceived;
@@ -522,11 +522,11 @@ export default class ParserCode {
             this.isValidNumber(nombre, field);
 
             if (nombre < minRange) {
-                throw new LocalizeError(MessageCodes.FORMAT_INVALID_SIRET, minRange + "");
+                throw new LocalizeError(MessageCodes.FORMAT_NUMBER_OUT_OF_RANGE, minRange + "");
             }
 
             if (nombre > maxRange) {
-                throw new LocalizeError(MessageCodes.FORMAT_INVALID_SIRET, maxRange + "");
+                throw new LocalizeError(MessageCodes.FORMAT_NUMBER_OUT_OF_RANGE, maxRange + "");
             }
             return Number(nombre);
         } catch (e) {

@@ -6,11 +6,11 @@
  * @group code/parser
  */
 
-import ParserCode from "./Parser.code";
 import {MessageCodes} from "../src/model/BifrostError";
-import {BifrostBench} from "../src/model/BifrostBench";
-import {FixtureObject} from "../src/model/FixtureObject";
+import {BifrostBench} from "../src";
+import {FixtureObject} from "../src";
 import {FixtureIndex} from "../src/fixtures/FixtureIndex";
+import {ParserCode} from "../src";
 
 let p: ParserCode = new ParserCode();
 
@@ -82,8 +82,12 @@ describe("Date parser", () => {
         ]),
         async (mock) => {
             let r = p.validator_date(mock.object, "date");
-            expect(r).toMatchSnapshot(mock.success);
-        }
+        },
+        [
+            MessageCodes.BAD_FORMAT.code,
+            MessageCodes.FORMAT_BAD_DATE_FORMAT.code,
+            MessageCodes.FORMAT_DATE_UNDEFINED.code,
+        ]
     );
 });
 
@@ -123,7 +127,7 @@ describe("Number validation", () => {
                     minRange: 0,
                     maxRange: 10,
                 },
-                {error: "ERR-0520"}
+                {error: MessageCodes.FORMAT_NUMBER_NOT_AN_INTEGER.code}
             ),
             new FixtureObject<{
                 nombre: number,
@@ -136,7 +140,7 @@ describe("Number validation", () => {
                     minRange: 0,
                     maxRange: 10,
                 },
-                {error: "ERR-0539"}
+                {error: MessageCodes.FORMAT_NUMBER_OUT_OF_RANGE.code}
             ),
             new FixtureObject<{
                 nombre: number,
@@ -149,7 +153,7 @@ describe("Number validation", () => {
                     minRange: 5,
                     maxRange: 10,
                 },
-                {error: "ERR-0538"}
+                {error: MessageCodes.FORMAT_NUMBER_OUT_OF_RANGE.code}
             ),
             new FixtureObject<{
                 nombre: any,
@@ -162,12 +166,17 @@ describe("Number validation", () => {
                     minRange: 5,
                     maxRange: 10,
                 },
-                {error: "ERR-0537"}
+                {error: MessageCodes.FORMAT_NUMBER_NOT_AN_INTEGER.code}
             ),
         ]),
         async (mock) => {
             let r = p.isValidNumberRange(mock.object.nombre, mock.object.minRange, mock.object.maxRange, "value:");
-        }
+        },
+        [
+            MessageCodes.BAD_FORMAT.code,
+            MessageCodes.FORMAT_NUMBER_NOT_AN_INTEGER.code,
+            MessageCodes.FORMAT_INVALID_NUMBER.code
+        ]
     );
 });
 

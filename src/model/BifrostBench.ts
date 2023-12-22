@@ -1,6 +1,7 @@
 import {FixtureVariances} from "./BifrostVariances";
 import {FixtureObject} from "./FixtureObject";
 import {getLocalList, microTesting, verifyError, verifySuccess} from "../utils";
+import {CodeM} from "./BifrostError";
 
 export type BifrostBenchCallback<Input, Output> = (mock: FixtureObject<Input, Output>) => Promise<void>;
 export type BifrostSimpleBenchCallback<Input, Output> = (objTest: FixtureObject<Input, Output>) => Promise<void>;
@@ -35,7 +36,8 @@ export class BifrostBench {
     public static listSuite<Input, Output>(
         description: string,
         list: Array<FixtureObject<Input, Output>>,
-        callback: BifrostSimpleBenchCallback<Input, Output>
+        callback: BifrostSimpleBenchCallback<Input, Output>,
+        additionnalErrorCode?: Array<CodeM>
     ): void {
         describe(description, () => {
             test.each(list.map(objTest => [objTest]))(
@@ -48,7 +50,7 @@ export class BifrostBench {
                         verifySuccess(objTest);
                     } catch (e) {
                         // Gestion des erreurs spécifique
-                        verifyError(objTest, e);
+                        verifyError(objTest, e, additionnalErrorCode);
                     }
                 }
             );
