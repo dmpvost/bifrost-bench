@@ -12,7 +12,7 @@ export class BifrostBench {
         description: string,
         template: FixtureObject<Input, Output>,
         variances: Array<FixtureVariances<Input, Output>>,
-        callback: BifrostBenchCallback<Input, Output>
+        callback: BifrostBenchCallback<Input, Output>,
     ): void {
         describe(description, () => {
             const testData = microTesting(template, variances);
@@ -28,7 +28,7 @@ export class BifrostBench {
                         // Gestion des erreurs spécifique à BifrostBench
                         verifyError(objTest, e);
                     }
-                }
+                },
             );
         });
     }
@@ -37,7 +37,7 @@ export class BifrostBench {
         description: string,
         list: Array<FixtureObject<Input, Output>>,
         callback: BifrostSimpleBenchCallback<Input, Output>,
-        additionnalErrorCode?: Array<CodeM>
+        additionnalErrorCode?: Array<CodeM>,
     ): void {
         describe(description, () => {
             test.each(list.map(objTest => [objTest]))(
@@ -52,7 +52,7 @@ export class BifrostBench {
                         // Gestion des erreurs spécifique
                         verifyError(objTest, e, additionnalErrorCode);
                     }
-                }
+                },
             );
         });
     }

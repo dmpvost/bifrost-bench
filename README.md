@@ -4,8 +4,6 @@
 BifröstBench is a streamlined MicroTesting library inspired by the mythological Bifröst bridge, symbolizing the connection between simplicity in testing and comprehensive code validation. This library empowers developers to write a single, template-based unit test for each function, promoting clarity and precision in the testing process.
 
 
-Pour mettre à jour le README de votre projet avec la description de l'utilisation de `BifrostBench`, voici une suggestion de contenu qui explique son fonctionnement et ses fonctionnalités clés :
-
 ---
 
 # BifrostBench : Outil de Test pour TypeScript

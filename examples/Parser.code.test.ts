@@ -68,7 +68,11 @@ describe("ProperName", () => {
         async (mock) => {
             let r = p.valid_proper_name(mock.object, false, "mock.object");
             expect(r).toBe(mock.success);
-        }
+        },
+        [
+            MessageCodes.FORMAT_NAME_TOO_LONG.code,
+            MessageCodes.FORMAT_STRING_TOO_LONG.code,
+        ]
     );
 });
 
