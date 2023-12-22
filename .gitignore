@@ -1,0 +1,5 @@
+/examples/__snapshots__/
+/dist/
+/node_modules/
+
+junit.xml
