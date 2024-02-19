@@ -1,21 +1,21 @@
 {
   "name": "bifrost-bench",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "BifröstBench is a streamlined MicroTesting library inspired by the mythological Bifröst bridge, symbolizing the connection between simplicity in testing and comprehensive code validation. This library empowers developers to write a single, template-based unit test for each function, promoting clarity and precision in the testing process.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist",
+    "README.md"
+  ],
   "scripts": {
-    "build": "tsc -p .",
-    "test": "jest --config jest.config.js -u",
-    "publish": "npm publish"
+    "build": "rm -rf dist && tsc -p .",
+    "test": "jest --config jest.config.js -u"
   },
   "author": "Vincent Ostermann",
   "license": "ISC",
   "languageName": "node",
   "packageManager": "yarn@4.0.2",
-  "os": [
-    "linux",
-    "darwin"
-  ],
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"

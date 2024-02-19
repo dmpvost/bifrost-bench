@@ -20,8 +20,7 @@ describe("Phone Parser", () => {
         BifrostBench.getList<string, string>([
             new FixtureObject("0645771773", "0645771773", {success: "0645771773"}),
             new FixtureObject("++55aa0645771773", "++55aa0645771773", {error: MessageCodes.FORMAT_PHONE_NUMBER_ERROR.code}),
-            new FixtureIndex().basics.PhoneNumber.success,
-            new FixtureIndex().basics.PhoneNumber.error,
+            new FixtureIndex().basics.PhoneNumber,
 
         ]),
         async (obj) => {

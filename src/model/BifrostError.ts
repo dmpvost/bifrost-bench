@@ -11,7 +11,7 @@ export type LocalizedMessage = {
 
 export type CodeM = string;
 
-class MessageTranslation {
+export class MessageTranslation {
     constructor(public code: CodeM, public translations: LangMessages) {
     }
 
